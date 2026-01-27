@@ -1,0 +1,64 @@
+/* Additional App-specific styles */
+.app-container {
+  min-height: 100vh;
+  padding: 2rem 1.5rem 4rem;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+/* Text Gradient */
+.text-gradient {
+  background: linear-gradient(135deg, #667eea 0%, #06b6d4 50%, #f97316 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Weather Icons (small + big clarity fix) */
+.weather-icon {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+}
+
+.weather-icon-lg {
+  width: 72px;
+  height: 72px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  .text-gradient {
+    font-size: 2rem;
+  }
+
+  .weather-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .weather-icon-lg {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+/* Hover effects for better UX */
+.glass:hover {
+  transform: translateY(-5px) scale(1.02);
+}
+
+
+/* 🌤 Weather condition icons fix (rain/sun/cloud) */
+img[src*="openweathermap.org/img/wn/"] {
+  image-rendering: auto;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.35)) contrast(1.1) saturate(1.1);
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
