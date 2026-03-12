@@ -1,4 +1,5 @@
 {
-    "java.compile.nullAnalysis.mode": "automatic",
-    "workbench.colorTheme": "Default High Contrast"
+  "java.compile.nullAnalysis.mode": "automatic",
+  "workbench.colorTheme": "Default High Contrast",
+  "java.configuration.updateBuildConfiguration": "interactive"
 }

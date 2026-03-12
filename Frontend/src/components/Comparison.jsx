@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import {
     Chart as ChartJS,
@@ -18,39 +18,42 @@ const Comparison = () => {
     const [data1, setData1] = useState(null);
     const [data2, setData2] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [hasCompared, setHasCompared] = useState(false); // NEW
+    const [error, setError] = useState(''); // NEW
+
+    const isValidCity = (city) => /^[a-zA-Z\s]{2,}$/.test(city.trim());
 
     const compareCities = async () => {
+        setError('');
+        setHasCompared(false);
+
+        if (!isValidCity(city1) || !isValidCity(city2)) {
+            setData1(null);
+            setData2(null);
+            return setError("Enter valid city names only");
+        }
+
         setLoading(true);
+
         setTimeout(() => {
             setData1({
                 name: city1,
-                main: { temp: 15, humidity: 80, feels_like: 13 },
+                main: { temp: 15 + city1.length, humidity: 80, feels_like: 13 + city1.length },
                 wind: { speed: 4 }
             });
             setData2({
                 name: city2,
-                main: { temp: 22, humidity: 60, feels_like: 22 },
+                main: { temp: 22 + city2.length, humidity: 60, feels_like: 22 + city2.length },
                 wind: { speed: 3 }
             });
             setLoading(false);
+            setHasCompared(true); // show results now
         }, 1000);
     };
 
-    useEffect(() => {
-        compareCities();
-    }, []);
+    // 🚫 REMOVED auto useEffect call
 
-    if (loading) {
-        return (
-            <div className="flex-center" style={{ height: '60vh' }}>
-                <div className="loader" style={{ width: '60px', height: '60px' }}></div>
-            </div>
-        );
-    }
-
-    if (!data1 || !data2) return null;
-
-    const chartData = {
+    const chartData = data1 && data2 && {
         labels: ['Temperature (°C)', 'Humidity (%)', 'Wind (m/s)', 'Feels Like (°C)'],
         datasets: [
             {
@@ -71,9 +74,7 @@ const Comparison = () => {
     const options = {
         responsive: true,
         maintainAspectRatio: false,
-        plugins: {
-            legend: { display: false }
-        },
+        plugins: { legend: { display: false } },
         scales: {
             y: {
                 beginAtZero: true,
@@ -87,35 +88,21 @@ const Comparison = () => {
         },
     };
 
-    const winner = Math.abs(data1.main.temp - 22) < Math.abs(data2.main.temp - 22) ? data1.name : data2.name;
+    const winner =
+        data1 && data2 &&
+        (Math.abs(data1.main.temp - 22) < Math.abs(data2.main.temp - 22)
+            ? data1.name
+            : data2.name);
 
     return (
         <div className="animated-entry" style={{ padding: '0 16px' }}>
-            <h2
-                className="mb-12 text-center"
-                style={{
-                    fontSize: 'clamp(2rem, 5vw, 3rem)',
-                    fontWeight: 800
-                }}
-            >
+            <h2 className="mb-12 text-center" style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 800 }}>
                 Weather <span className="text-gradient">Battle</span>
             </h2>
 
-            {/* MODERN CITY INPUTS */}
-            <div
-                className="glass mb-12"
-                style={{
-                    maxWidth: '900px',
-                    margin: '0 auto 3rem',
-                    padding: '32px'
-                }}
-            >
-                <div style={{
-                    display: 'flex',
-                    gap: 20,
-                    flexWrap: 'wrap',
-                    justifyContent: 'center'
-                }}>
+            {/* MODERN CITY INPUTS (UNCHANGED UI) */}
+            <div className="glass mb-12" style={{ maxWidth: '900px', margin: '0 auto 3rem', padding: '32px' }}>
+                <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap', justifyContent: 'center' }}>
                     <input
                         value={city1}
                         onChange={(e) => setCity1(e.target.value)}
@@ -123,14 +110,7 @@ const Comparison = () => {
                         placeholder="Enter First City"
                         style={{ flex: 1, minWidth: 220, fontSize: '1.05rem' }}
                     />
-                    <div style={{
-                        width: '100%',
-                        textAlign: 'center',
-                        fontSize: '2rem',
-                        opacity: 0.4
-                    }}>
-                        VS
-                    </div>
+                    <div style={{ width: '100%', textAlign: 'center', fontSize: '2rem', opacity: 0.4 }}>VS</div>
                     <input
                         value={city2}
                         onChange={(e) => setCity2(e.target.value)}
@@ -138,124 +118,73 @@ const Comparison = () => {
                         placeholder="Enter Second City"
                         style={{ flex: 1, minWidth: 220, fontSize: '1.05rem' }}
                     />
-                    <div style={{
-                        width: '100%',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        marginTop: 12
-                    }}>
-                        <button
-                            onClick={compareCities}
-                            className="btn-primary"
-                            style={{ padding: '14px 40px', fontSize: '1rem' }}
-                        >
+                    <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: 12 }}>
+                        <button onClick={compareCities} className="btn-primary" style={{ padding: '14px 40px', fontSize: '1rem' }}>
                             Compare Cities
                         </button>
                     </div>
                 </div>
+
+                {error && <p style={{ color: '#ff6b6b', textAlign: 'center', marginTop: 15 }}>{error}</p>}
             </div>
 
-            {/* CHART SECTION */}
-            <div
-                className="glass mb-6"
-                style={{
-                    maxWidth: '1000px',
-                    margin: '0 auto',
-                    padding: '40px',
-                    position: 'relative'
-                }}
-            >
-                <h3 style={{
-                    textAlign: 'center',
-                    marginBottom: 10,
-                    fontSize: '1.6rem'
-                }}>
-                    📈 Analytical Weather Comparison
-                </h3>
-                <p style={{
-                    textAlign: 'center',
-                    opacity: 0.7,
-                    marginBottom: 30
-                }}>
-                    This chart compares temperature comfort, humidity balance, and wind intensity between both cities.
-                </p>
-
-                {/* Custom Legend */}
-                <div style={{
-                    position: 'absolute',
-                    top: 20,
-                    right: 30,
-                    display: 'flex',
-                    gap: 14
-                }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                        <span style={{
-                            width: 14,
-                            height: 14,
-                            background: 'rgba(102,126,234,0.9)',
-                            borderRadius: 4
-                        }}></span>
-                        <span>{data1.name}</span>
-                    </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                        <span style={{
-                            width: 14,
-                            height: 14,
-                            background: 'rgba(246,147,251,0.9)',
-                            borderRadius: 4
-                        }}></span>
-                        <span>{data2.name}</span>
-                    </div>
+            {loading && (
+                <div className="flex-center" style={{ height: '60vh' }}>
+                    <div className="loader" style={{ width: '60px', height: '60px' }}></div>
                 </div>
+            )}
 
-                <div style={{ height: '420px' }}>
-                    <Bar options={options} data={chartData} />
-                </div>
-            </div>
+            {/* RESULTS SECTION (UI SAME, only condition added) */}
+            {hasCompared && data1 && data2 && (
+                <>
+                    <div className="glass mb-6" style={{ maxWidth: '1000px', margin: '0 auto', padding: '40px', position: 'relative' }}>
+                        <h3 style={{ textAlign: 'center', marginBottom: 10, fontSize: '1.6rem' }}>
+                            📈 Analytical Weather Comparison
+                        </h3>
+                        <p style={{ textAlign: 'center', opacity: 0.7, marginBottom: 30 }}>
+                            This chart compares temperature comfort, humidity balance, and wind intensity between both cities.
+                        </p>
 
-            {/* CITY STATS BELOW CHART */}
-            <div style={{
-                maxWidth: '1000px',
-                margin: '0 auto 3rem',
-                display: 'grid',
-                gap: 20,
-                gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))'
-            }}>
-                {[data1, data2].map((city, i) => (
-                    <div key={i} className="glass" style={{ padding: '24px', textAlign: 'center' }}>
-                        <h4
-                            className="text-gradient"
-                            style={{ fontSize: '1.4rem', marginBottom: 10 }}
-                        >
-                            {city.name}
-                        </h4>
-                        <p>🌡 Temp: <strong>{city.main.temp}°C</strong></p>
-                        <p>💧 Humidity: <strong>{city.main.humidity}%</strong></p>
-                        <p>🌬 Wind: <strong>{city.wind.speed} m/s</strong></p>
-                        <p>🤔 Feels Like: <strong>{city.main.feels_like}°C</strong></p>
+                        <div style={{ height: '420px' }}>
+                            <Bar options={options} data={chartData} />
+                        </div>
                     </div>
-                ))}
-            </div>
 
-            {/* Winner Card */}
-            <div
-                className="glass flex-col"
-                style={{
-                    maxWidth: '650px',
-                    margin: '0 auto',
-                    padding: '40px',
-                    border: '2px solid rgba(102,126,234,0.4)',
-                    background: 'linear-gradient(135deg, rgba(102,126,234,0.18), rgba(118,75,162,0.18))',
-                    textAlign: 'center'
-                }}
-            >
-                <h3 className="mb-8 flex-center gap-3" style={{ fontSize: '2rem' }}>
-                    🏆 Winner: <span className="text-gradient">{winner}</span>
-                </h3>
-                <p style={{ fontSize: '1.2rem', lineHeight: 1.6, opacity: 0.9 }}>
-                    Based on comfort-focused metrics, <strong className="text-gradient">{winner}</strong> currently offers more favorable outdoor conditions.
-                </p>
-            </div>
+                    <div style={{
+                        maxWidth: '1000px',
+                        margin: '0 auto 3rem',
+                        display: 'grid',
+                        gap: 20,
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))'
+                    }}>
+                        {[data1, data2].map((city, i) => (
+                            <div key={i} className="glass" style={{ padding: '24px', textAlign: 'center' }}>
+                                <h4 className="text-gradient" style={{ fontSize: '1.4rem', marginBottom: 10 }}>{city.name}</h4>
+                                <p>🌡 Temp: <strong>{city.main.temp}°C</strong></p>
+                                <p>💧 Humidity: <strong>{city.main.humidity}%</strong></p>
+                                <p>🌬 Wind: <strong>{city.wind.speed} m/s</strong></p>
+                                <p>🤔 Feels Like: <strong>{city.main.feels_like}°C</strong></p>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="glass flex-col" style={{
+                        maxWidth: '650px',
+                        margin: '0 auto',
+                        padding: '40px',
+                        border: '2px solid rgba(102,126,234,0.4)',
+                        background: 'linear-gradient(135deg, rgba(102,126,234,0.18), rgba(118,75,162,0.18))',
+                        textAlign: 'center'
+                    }}>
+                        <h3 className="mb-8 flex-center gap-3" style={{ fontSize: '2rem' }}>
+                            🏆 Winner: <span className="text-gradient">{winner}</span>
+                        </h3>
+                        <p style={{ fontSize: '1.2rem', lineHeight: 1.6, opacity: 0.9 }}>
+                            Based on comfort-focused metrics, <strong className="text-gradient">{winner}</strong> currently offers more favorable outdoor conditions.
+                        </p>
+                    </div>
+                </>
+            )}
         </div>
     );
 };

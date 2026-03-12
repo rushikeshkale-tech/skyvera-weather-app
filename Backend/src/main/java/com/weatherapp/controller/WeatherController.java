@@ -1,7 +1,10 @@
 package com.weatherapp.controller;
 
+import com.weatherapp.model.Weather;
 import com.weatherapp.service.WeatherService;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -33,5 +36,10 @@ public class WeatherController {
             return weatherService.getForecastByCoords(lat, lon);
         }
         return weatherService.getForecast(city != null ? city : "London");
+    }
+
+    @GetMapping("/history/{city}")
+    public List<Weather> getWeatherHistory(@PathVariable String city) {
+        return weatherService.getWeatherHistory(city);
     }
 }
