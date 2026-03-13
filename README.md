@@ -104,7 +104,7 @@ Provides useful information about:
 # 📷 Application Screenshots
 
 ## Dashboard
-![Dashboard](screenshots/dashboard.png)
+![Dashboard]([screenshots/dashboard.png](https://github.com/rushikeshkale-tech/skyvera-weather-app/blob/main/Weather%20Output%20Images/1.PNG))
 
 ## Weather Forecast
 ![Forecast](screenshots/forecast.png)
