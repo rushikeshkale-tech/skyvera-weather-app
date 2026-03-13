@@ -104,7 +104,23 @@ Provides useful information about:
 # 📷 Application Screenshots
 
 ## Dashboard
-![Dashboard]([screenshots/dashboard.png](https://github.com/rushikeshkale-tech/skyvera-weather-app/blob/main/Weather%20Output%20Images/1.PNG))
+
+![Dashboard](Weather%20Output%20Images/1.png)
+
+## Weather Forecast
+![Forecast](Weather%20Output%20Images/forecast.png)
+
+## Global Map
+![Map](Weather%20Output%20Images/map.png)
+
+## Compare Cities
+![Compare](Weather%20Output%20Images/compare.png)
+
+## Weather Analytics
+![Analytics](Weather%20Output%20Images/analytics.png)
+
+## Weather Guide
+![Guide](Weather%20Output%20Images/guide.png))
 
 ## Weather Forecast
 ![Forecast](screenshots/forecast.png)
