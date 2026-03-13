@@ -103,39 +103,28 @@ Provides useful information about:
 
 # 📷 Application Screenshots
 
+
+
 ## Dashboard
-
-![Dashboard](Weather%20Output%20Images/1.png)
-
-## Weather Forecast
-![Forecast](Weather%20Output%20Images/forecast.png)
-
-## Global Map
-![Map](Weather%20Output%20Images/map.png)
-
-## Compare Cities
-![Compare](Weather%20Output%20Images/compare.png)
-
-## Weather Analytics
-![Analytics](Weather%20Output%20Images/analytics.png)
-
-## Weather Guide
-![Guide](Weather%20Output%20Images/guide.png))
+![Dashboard](Weather%20Output%20Images/1.PNG)
 
 ## Weather Forecast
-![Forecast](screenshots/forecast.png)
+![Forecast](Weather%20Output%20Images/2.PNG)
 
 ## Global Map
-![Map](screenshots/map.png)
+![Map](Weather%20Output%20Images/3.PNG)
 
 ## Compare Cities
-![Compare](screenshots/compare.png)
+![Compare](Weather%20Output%20Images/4.PNG)
 
 ## Weather Analytics
-![Analytics](screenshots/analytics.png)
+![Analytics](Weather%20Output%20Images/5.PNG)
+
+## Winner Result
+![Winner](Weather%20Output%20Images/6.PNG)
 
 ## Weather Guide
-![Guide](screenshots/guide.png)
+![Guide](Weather%20Output%20Images/7.PNG)
 
 ---
 
