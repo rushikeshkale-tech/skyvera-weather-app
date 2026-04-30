@@ -1,3 +1,11 @@
+## Purpose
+This is a personal project created for learning backend development and API design.
+
+## Author
+Rushikesh Kale  
+GitHub: https://github.com/rushikeshkale-tech
+
+
 # 🌦️ Skyvera Weather App
 
 Skyvera Weather App is a **Full Stack Weather Application** that allows users to search and explore real-time weather data for cities across the world.
