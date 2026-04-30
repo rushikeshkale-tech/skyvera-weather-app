@@ -1,10 +1,9 @@
-## Purpose
-This is a personal project created for learning backend development and API design.
+# Short URL Service
 
-## Author
-Rushikesh Kale  
-GitHub: https://github.com/rushikeshkale-tech
+👨‍💻 Author: Rushikesh Kale  
+📌 Personal Learning Project
 
+----------------------------------------------------------------------------------------------------------------------------------------------------
 
 # 🌦️ Skyvera Weather App
 
@@ -140,5 +139,17 @@ Provides useful information about:
 
 ## 1️⃣ Clone Repository
 
-```bash
+bash
 git clone https://github.com/rushikeshkale-tech/skyvera-weather-app.git
+
+
+--------------------------------------------------------------------------------------------------
+
+## Purpose
+This is a personal project created for learning backend development and API design.
+
+## Author
+Rushikesh Kale  
+GitHub: https://github.com/rushikeshkale-tech
+linkedin: https://www.linkedin.com/in/rushikeshkale-tech 
+
