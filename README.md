@@ -1,16 +1,14 @@
-# Short URL Service
+# Skyvera Weather App
 
 👨‍💻 Author: Rushikesh Kale  
-📌 Personal Learning Project
-
+📌 Personal Learning Project  
 
 ## Purpose
-This is a personal project created for learning backend development and API design, URL Shortening Service that converts long URLs into short and shareable links.
+This is a personal project created for learning API integration and frontend development.  
+The Weather App fetches real-time weather data and displays temperature, weather conditions, and city information.
 
-
-GitHub: https://github.com/rushikeshkale-tech
-linkedin: https://www.linkedin.com/in/rushikeshkale-tech 
-
+GitHub: https://github.com/rushikeshkale-tech  
+linkedin: https://www.linkedin.com/in/rushikeshkale-tech
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 
