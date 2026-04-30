@@ -5,7 +5,7 @@
 
 
 ## Purpose
-This is a personal project created for learning backend development and API design.
+This is a personal project created for learning backend development and API design, URL Shortening Service that converts long URLs into short and shareable links.
 
 
 GitHub: https://github.com/rushikeshkale-tech
