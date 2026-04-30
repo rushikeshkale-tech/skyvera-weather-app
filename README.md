@@ -3,6 +3,15 @@
 👨‍💻 Author: Rushikesh Kale  
 📌 Personal Learning Project
 
+
+## Purpose
+This is a personal project created for learning backend development and API design.
+
+
+GitHub: https://github.com/rushikeshkale-tech
+linkedin: https://www.linkedin.com/in/rushikeshkale-tech 
+
+
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 
 # 🌦️ Skyvera Weather App
@@ -145,11 +154,4 @@ git clone https://github.com/rushikeshkale-tech/skyvera-weather-app.git
 
 --------------------------------------------------------------------------------------------------
 
-## Purpose
-This is a personal project created for learning backend development and API design.
-
-## Author
-Rushikesh Kale  
-GitHub: https://github.com/rushikeshkale-tech
-linkedin: https://www.linkedin.com/in/rushikeshkale-tech 
 
