@@ -1,16 +1,3 @@
-# Skyvera Weather App
-
-👨‍💻 Author: Rushikesh Kale  
-📌 Personal Learning Project  
-
-## Purpose
-This is a personal project created for learning API integration and frontend development.  
-The Weather App fetches real-time weather data and displays temperature, weather conditions, and city information.
-
-GitHub: https://github.com/rushikeshkale-tech  
-linkedin: https://www.linkedin.com/in/rushikeshkale-tech
-
-----------------------------------------------------------------------------------------------------------------------------------------------------
 
 # 🌦️ Skyvera Weather App
 
